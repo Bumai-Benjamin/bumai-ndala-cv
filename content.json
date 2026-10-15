@@ -1,0 +1,327 @@
+{
+  "site": {
+    "url": "https://bumai-ndala.netlify.app/",
+    "title": "Bumai Ndala · Mobile Application Administrator",
+    "description": "Bumai Benjamin Ndala is a Mobile Application Administrator for CallAFix at Mfumu Investments and a Computer Science (Software Development) student at NUST in Windhoek, Namibia.",
+    "pdf": "bumai-ndala-cv.pdf",
+    "year": "2026"
+  },
+  "person": {
+    "name_full": "Bumai Benjamin Ndala",
+    "first": "Bumai Benjamin",
+    "last": "Ndala",
+    "name_short": "Bumai Ndala",
+    "initials": "BN",
+    "role": "Mobile Application Administrator",
+    "role_line": "Mobile Application Administrator for CallAFix at Mfumu Investments",
+    "employer": "Mfumu Investments",
+    "product": "CallAFix",
+    "location": "Windhoek, Namibia",
+    "email": "ndalabumai@gmail.com",
+    "phone_display": "+264 81 440 8211",
+    "phone_tel": "+264814408211",
+    "linkedin": "https://www.linkedin.com/in/bumai-ndala4a4388317/",
+    "linkedin_display": "linkedin.com/in/bumai-ndala4a4388317",
+    "summary": "I work for Mfumu Investments as the Mobile Application Administrator for CallAFix, an on-demand marketplace that connects customers in Windhoek with skilled artisans. Alongside the job, I'm studying Computer Science (Software Development) at NUST. I'm organized and adaptable, and I'm at my best solving practical problems, whether that's in code, a database, a design file or a video edit.",
+    "photo": "/assets/img/bumai-badge.jpg"
+  },
+  "facts": [
+    {
+      "icon": "pin",
+      "text": "Windhoek, Namibia"
+    },
+    {
+      "icon": "school",
+      "text": "BSc Computer Science · NUST"
+    },
+    {
+      "icon": "car",
+      "text": "Code B driving licence"
+    },
+    {
+      "icon": "translate",
+      "text": "4 languages"
+    }
+  ],
+  "experience": [
+    {
+      "id": "callafix",
+      "title": "Mobile Application Administrator",
+      "org": "Mfumu Investments",
+      "product": "CallAFix",
+      "period": "Current role",
+      "location": "Windhoek, Namibia",
+      "about": "CallAFix is an on-demand service marketplace that connects customers with skilled artisans.",
+      "points": [
+        "Tested the CallAFix app ahead of launch and reported the results in a Phase 1 testing report.",
+        "Wrote the application baseline documentation, covering features, architecture and a nine-phase exploration plan.",
+        "Help recruit and onboard artisans onto the platform through lead tracking, WhatsApp and SMS outreach, and clear answers to common concerns.",
+        "Reach out to vocational training centres to connect with qualified artisans.",
+        "Created launch material, including a 90-day go-to-market plan, call-out fee market research, an artisan registration deck, and onboarding guides for customers and providers."
+      ]
+    },
+    {
+      "id": "driver",
+      "title": "Restaurant Driver",
+      "org": "Escape Lounge & Restaurant",
+      "period": "Nov 2024 – Jan 2025",
+      "location": "Windhoek, Namibia",
+      "points": [
+        "Collected and delivered restaurant stock on schedule.",
+        "Drove staff home on time after their shifts."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "id": "bsc",
+      "title": "BSc Computer Science (Software Development)",
+      "org": "Namibia University of Science and Technology (NUST)",
+      "period": "In progress",
+      "location": "Windhoek, Namibia",
+      "points": [
+        "Coursework includes Operating Systems and Mathematics for Computing and Informatics."
+      ]
+    }
+  ],
+  "journey": {
+    "columns": [
+      {
+        "id": "school",
+        "label": "School"
+      },
+      {
+        "id": "uni",
+        "label": "University"
+      },
+      {
+        "id": "work",
+        "label": "Work"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "french",
+        "col": "school",
+        "kind": "study",
+        "icon": "translate",
+        "title": "Top 3 in French",
+        "sub": "Foreign language · 2019–2022",
+        "detail_meta": "French as a foreign language · 2019–2022",
+        "detail": [
+          "Placed in the top three for French as a foreign language from 2019 to 2022."
+        ]
+      },
+      {
+        "id": "english",
+        "col": "school",
+        "kind": "study",
+        "icon": "book",
+        "title": "90% in English",
+        "sub": "First language · 2022",
+        "detail_meta": "English First Language · 2022",
+        "detail": [
+          "Scored 90% in English First Language in 2022."
+        ]
+      },
+      {
+        "id": "bsc",
+        "col": "uni",
+        "kind": "study",
+        "icon": "school",
+        "title": "BSc Computer Science",
+        "sub": "Software Development · NUST",
+        "tag": "In progress",
+        "detail_meta": "Namibia University of Science and Technology · In progress",
+        "detail": [
+          "Studying Computer Science with a major in Software Development.",
+          "Coursework includes Operating Systems and Mathematics for Computing and Informatics."
+        ]
+      },
+      {
+        "id": "project",
+        "col": "uni",
+        "kind": "study",
+        "icon": "database",
+        "title": "Project lead",
+        "sub": "Database programming app · 2023",
+        "detail_meta": "Database programming application project · 2023",
+        "detail": [
+          "Held a leadership role in a database programming application development project."
+        ]
+      },
+      {
+        "id": "driver",
+        "col": "work",
+        "kind": "work",
+        "icon": "truck",
+        "title": "Restaurant Driver",
+        "sub": "Escape Lounge & Restaurant · 2024–25",
+        "experience": "driver"
+      },
+      {
+        "id": "callafix",
+        "col": "work",
+        "kind": "work",
+        "icon": "phone",
+        "title": "Mobile Application Administrator",
+        "sub": "CallAFix · Mfumu Investments",
+        "tag": "Now",
+        "now": true,
+        "experience": "callafix"
+      }
+    ],
+    "edges": [
+      {
+        "from": "french",
+        "to": "bsc",
+        "kind": "study"
+      },
+      {
+        "from": "english",
+        "to": "bsc",
+        "kind": "study"
+      },
+      {
+        "from": "bsc",
+        "to": "project",
+        "kind": "study"
+      },
+      {
+        "from": "project",
+        "to": "callafix",
+        "kind": "study"
+      },
+      {
+        "from": "bsc",
+        "to": "callafix",
+        "kind": "study",
+        "dashed": true
+      },
+      {
+        "from": "driver",
+        "to": "callafix",
+        "kind": "work"
+      }
+    ]
+  },
+  "skills": {
+    "code": [
+      {
+        "label": "JavaScript",
+        "accent": true
+      },
+      {
+        "label": "HTML"
+      },
+      {
+        "label": "CSS"
+      },
+      {
+        "label": "Ballerina"
+      },
+      {
+        "label": "Database programming",
+        "wide": true
+      }
+    ],
+    "groups": [
+      {
+        "label": "Craft",
+        "items": [
+          "Graphic design",
+          "Video editing"
+        ]
+      },
+      {
+        "label": "Operations",
+        "items": [
+          "Database management",
+          "Microsoft Office Suite",
+          "Commercial driving",
+          "Delivery pickup"
+        ]
+      },
+      {
+        "label": "Ways of working",
+        "items": [
+          "Strategic problem-solving",
+          "Effective organization",
+          "Collaborative teamwork",
+          "Adaptability",
+          "Critical thinking"
+        ]
+      }
+    ]
+  },
+  "languages": [
+    {
+      "name": "English",
+      "level": "Excellent",
+      "score": 5
+    },
+    {
+      "name": "Afrikaans",
+      "level": "Great",
+      "score": 4
+    },
+    {
+      "name": "Subiya",
+      "level": "Good",
+      "score": 3
+    },
+    {
+      "name": "French",
+      "level": "Good",
+      "score": 3
+    }
+  ],
+  "highlights": [
+    {
+      "figure": "90%",
+      "ring": 0.9,
+      "tone": "coral",
+      "title": "English First Language",
+      "meta": "2022"
+    },
+    {
+      "figure": "Top 3",
+      "icon": "medal",
+      "tone": "butter",
+      "title": "French as a foreign language",
+      "meta": "2019–2022"
+    },
+    {
+      "figure": "Lead",
+      "icon": "people",
+      "tone": "peri",
+      "title": "Database programming application project",
+      "meta": "2023"
+    }
+  ],
+  "interests": [
+    "Video editing",
+    "Football",
+    "Reading",
+    "Learning new skills",
+    "Adventure"
+  ],
+  "details": [
+    {
+      "label": "Driving licence",
+      "value": "Code B"
+    },
+    {
+      "label": "Nationality",
+      "value": "Namibian"
+    },
+    {
+      "label": "Based in",
+      "value": "Windhoek, Namibia"
+    },
+    {
+      "label": "References",
+      "value": "Available on request"
+    }
+  ]
+}

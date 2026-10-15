@@ -1,0 +1,351 @@
+{%- macro icon(name, cls='') -%}<svg class="ic {{ cls }}" aria-hidden="true" focusable="false"><use href="#i-{{ name }}"/></svg>{%- endmacro -%}
+{%- macro folder_head(title, id=None, count=None, tag='h2') -%}
+<div class="folder-head">
+  <{{ tag }} class="folder-tab"{% if id %} id="{{ id }}"{% endif %}><span>{{ title }}</span>{% if count %}<span class="count" aria-label="{{ count }} items">{{ count }}</span>{% endif %}</{{ tag }}>
+  <div class="folder-bay">{{ caller() if caller else '' }}</div>
+</div>
+{%- endmacro -%}
+{%- macro theme_switch(extra='') -%}
+<button class="theme-switch {{ extra }}" type="button" role="switch" aria-checked="false" aria-label="Dark mode" data-theme-switch>
+  <span class="ts-track"><span class="ts-knob"><svg class="ic ts-sun" aria-hidden="true"><use href="#i-sun"/></svg><svg class="ic ts-moon" aria-hidden="true"><use href="#i-moon"/></svg></span></span>
+</button>
+{%- endmacro -%}
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ site.title }}</title>
+<meta name="description" content="{{ site.description }}">
+<meta name="author" content="{{ person.name_full }}">
+<link rel="canonical" href="{{ site.url }}">
+<meta name="theme-color" content="#E6E8EE" data-theme-color>
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="{{ person.name_full }}">
+<meta property="og:title" content="{{ site.title }}">
+<meta property="og:description" content="{{ site.description }}">
+<meta property="og:url" content="{{ site.url }}">
+<meta property="og:image" content="{{ site.url }}assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ person.name_full }}, {{ person.role_line }}">
+<meta property="profile:first_name" content="Bumai">
+<meta property="profile:last_name" content="{{ person.last }}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/assets/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/roboto-flex-display.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css?v={{ v.css }}">
+<script src="/assets/js/theme-init.js?v={{ v.init }}"></script>
+<script src="/assets/js/site.js?v={{ v.js }}" defer></script>
+<script type="application/ld+json">{{ jsonld|safe }}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+{% include 'icons.svg.j2' %}
+<div class="backdrop" aria-hidden="true"></div>
+
+<div class="shell">
+  <aside class="rail" aria-label="Quick actions">
+    <button class="rail-fab" type="button" data-open-contact data-ripple aria-label="Write to me">{{ icon('edit') }}</button>
+    <nav class="rail-tools" aria-label="Contact shortcuts">
+      <a class="icon-btn" href="/{{ site.pdf }}" download data-ripple aria-label="Download CV as PDF" data-tip="Download CV">{{ icon('download') }}</a>
+      <a class="icon-btn" href="mailto:{{ person.email }}" data-ripple aria-label="Email {{ person.email }}" data-tip="Email">{{ icon('mail') }}</a>
+      <a class="icon-btn" href="tel:{{ person.phone_tel }}" data-ripple aria-label="Call {{ person.phone_display }}" data-tip="Call">{{ icon('call') }}</a>
+      <a class="icon-btn" href="{{ person.linkedin }}" target="_blank" rel="noopener" data-ripple aria-label="LinkedIn profile (opens in a new tab)" data-tip="LinkedIn">{{ icon('linkedin') }}</a>
+      <button class="icon-btn" type="button" data-share data-ripple aria-label="Share this page" data-tip="Share">{{ icon('share') }}</button>
+    </nav>
+    {{ theme_switch('ts-vertical') }}
+  </aside>
+
+  <div class="frame">
+    <header class="appbar" data-appbar>
+      <a class="brand" href="#profile" aria-label="{{ person.name_short }}, back to top">
+        <span class="mono" aria-hidden="true">{{ person.initials }}</span>
+        <span class="brand-name">{{ person.name_short }}</span>
+      </a>
+      <nav class="tabs" aria-label="Sections">
+        <span class="tabs-ink" aria-hidden="true"></span>
+        <a href="#profile" data-tab="profile" aria-current="true">Profile</a>
+        <a href="#journey" data-tab="journey">Journey</a>
+        <a href="#skills" data-tab="skills">Skills</a>
+        <a href="#contact" data-tab="contact">Contact</a>
+      </nav>
+      <div class="appbar-end">
+        {{ theme_switch('ts-compact') }}
+        <a class="btn btn-ink btn-sm appbar-cv" href="/{{ site.pdf }}" download data-ripple aria-label="Download CV as PDF">{{ icon('download') }}<span>Download CV</span></a>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- Profile -->
+      <section id="profile" class="hero" aria-labelledby="hero-name">
+        <div class="folder hero-folder reveal">
+          <div class="folder-head">
+            <p class="folder-tab"><span class="status"><span class="led" aria-hidden="true"></span>Currently employed</span></p>
+            <div class="folder-bay"></div>
+          </div>
+          <div class="folder-body hero-body">
+            <div class="hero-copy">
+              <h1 id="hero-name" class="name"><span class="name-first">{{ person.first }}</span> <span class="name-last">{{ person.last }}</span></h1>
+              <p class="role-line">{{ person.role }} <span class="soft">for</span> {{ person.product }} <span class="soft">at</span> {{ person.employer }}</p>
+              <p class="summary">{{ person.summary }}</p>
+              <div class="actions">
+                <a class="btn btn-ink" href="/{{ site.pdf }}" download data-ripple>{{ icon('download') }}<span>Download CV</span></a>
+                <button class="btn btn-soft" type="button" data-open-contact data-ripple>{{ icon('edit') }}<span>Write to me</span></button>
+                <a class="icon-btn icon-btn-lg" href="{{ person.linkedin }}" target="_blank" rel="noopener" data-ripple aria-label="LinkedIn profile (opens in a new tab)">{{ icon('linkedin') }}</a>
+              </div>
+              <ul class="facts" aria-label="Quick facts">
+                {% for f in facts %}<li>{{ icon(f.icon) }}<span>{{ f.text }}</span></li>{% endfor %}
+              </ul>
+            </div>
+            <div class="badge-slot" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <div class="badge-rig" aria-hidden="true">
+          <div class="swing">
+            <svg class="lanyard" viewBox="0 0 240 230" preserveAspectRatio="xMidYMax meet">
+              <defs>
+                <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F7E7B4"/><stop offset=".55" stop-color="#C9A24E"/><stop offset="1" stop-color="#7A5814"/></linearGradient>
+                <linearGradient id="strapShade" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".22"/><stop offset=".25" stop-color="#000" stop-opacity="0"/><stop offset=".75" stop-color="#fff" stop-opacity=".08"/><stop offset="1" stop-color="#000" stop-opacity=".25"/></linearGradient>
+                <path id="strapL" d="M58 -10 L113 196"/>
+                <path id="strapR" d="M182 -10 L127 196"/>
+              </defs>
+              <g class="strap">
+                <path d="M58 -10 L113 196" stroke-width="27" class="strap-edge"/>
+                <path d="M182 -10 L127 196" stroke-width="27" class="strap-edge"/>
+                <path d="M58 -10 L113 196" stroke-width="23" class="strap-face"/>
+                <path d="M182 -10 L127 196" stroke-width="23" class="strap-face"/>
+                <text class="strap-print" dominant-baseline="central"><textPath href="#strapL" startOffset="6">CALLAFIX • CALLAFIX • CALLAFIX •</textPath></text>
+                <text class="strap-print" dominant-baseline="central"><textPath href="#strapR" startOffset="6">CALLAFIX • CALLAFIX • CALLAFIX •</textPath></text>
+              </g>
+              <rect x="102" y="186" width="36" height="20" rx="6" fill="url(#brass)" stroke="rgba(60,40,0,.45)"/>
+              <circle cx="120" cy="214" r="9.5" fill="none" stroke="url(#brass)" stroke-width="4.6"/>
+            </svg>
+            <div class="badge">
+              <div class="badge-clip"></div>
+              <div class="badge-slot-hole"></div>
+              <div class="badge-band"><b>CALLAFIX</b><small>{{ person.employer }}</small></div>
+              <div class="badge-photo{% if person.photo %} has-photo{% endif %}">{% if person.photo %}<img src="{{ person.photo }}" alt="" width="104" height="130" decoding="async">{% else %}<span>{{ person.initials }}</span>{% endif %}</div>
+              <div class="badge-who"><strong>{{ person.name_short }}</strong><span>{{ person.role }}</span></div>
+              <svg class="badge-code" viewBox="0 0 160 30" preserveAspectRatio="none">{% for r in barcode %}<rect x="{{ r[0] }}" y="0" width="{{ r[1] }}" height="30"/>{% endfor %}</svg>
+              <div class="badge-sheen"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Journey -->
+      <section id="journey" class="section" aria-labelledby="journey-title">
+        <div class="folder reveal">
+          {% call folder_head('Career journey', 'journey-title', journey.nodes|length) %}
+            <div class="segmented" role="radiogroup" aria-label="Filter the journey">
+              <button type="button" role="radio" aria-checked="true" data-filter="all" data-ripple>All</button>
+              <button type="button" role="radio" aria-checked="false" data-filter="study" data-ripple>Study</button>
+              <button type="button" role="radio" aria-checked="false" data-filter="work" data-ripple>Work</button>
+            </div>
+          {% endcall %}
+          <div class="folder-body">
+            <div class="graph" data-graph>
+              <svg class="wires" aria-hidden="true" focusable="false"></svg>
+              {% for col in journey.columns %}
+              <div class="graph-col" data-col="{{ col.id }}">
+                <p class="col-head">{{ col.label }}</p>
+                <ol class="col-nodes">
+                  {% for n in journey.nodes if n.col == col.id %}
+                  <li>
+                    <button type="button" class="node{% if n.now %} is-now{% endif %}" data-node="{{ n.id }}" data-kind="{{ n.kind }}" data-col="{{ n.col }}" aria-haspopup="dialog">
+                      <span class="port port-in" aria-hidden="true"></span>
+                      <span class="node-icon">{{ icon(n.icon) }}</span>
+                      <span class="node-text"><strong>{{ n.title }}</strong><span>{{ n.sub }}</span>{% if n.tag %}<span class="node-tag">{% if n.now %}<span class="led" aria-hidden="true"></span>{% endif %}{{ n.tag }}</span>{% endif %}</span>
+                      <span class="node-more" aria-hidden="true">{{ icon('more') }}</span>
+                      <span class="port port-out" aria-hidden="true"></span>
+                    </button>
+                  </li>
+                  {% endfor %}
+                </ol>
+              </div>
+              {% endfor %}
+            </div>
+            <p class="graph-hint">{{ icon('arrow') }}Select any step to open its details.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills, languages, highlights -->
+      <section id="skills" class="section cluster" aria-label="Skills, languages and highlights">
+        <div class="folder f-skills reveal">
+          {% call folder_head('Skills', 'skills-title') %}<span class="bay-note" aria-hidden="true">{{ icon('code') }}<span class="typed" data-typed>Tap a key</span><i class="caret"></i></span>{% endcall %}
+          <div class="folder-body">
+            <p class="group-label">Code</p>
+            <div class="keys">
+              {% for k in skills.code %}<button type="button" class="key{% if k.accent %} key-accent{% endif %}{% if k.wide %} key-wide{% endif %}">{{ k.label }}</button>{% endfor %}
+            </div>
+            {% for g in skills.groups %}
+            <p class="group-label">{{ g.label }}</p>
+            <ul class="chips">{% for it in g['items'] %}<li>{{ it }}</li>{% endfor %}</ul>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="folder f-langs reveal">
+          {% call folder_head('Languages', 'langs-title', languages|length) %}{% endcall %}
+          <div class="folder-body">
+            <ul class="dials">
+              {% for l in languages %}
+              <li class="dial">
+                <svg class="dial-svg" viewBox="0 0 96 96" aria-hidden="true">
+                  <circle class="dial-face" cx="48" cy="48" r="30"/>
+                  {% for seg in ring_segments %}<path class="dial-seg{% if loop.index <= l.score %} on{% endif %}" d="{{ seg }}"/>{% endfor %}
+                </svg>
+                <span class="dial-level">{{ l.level }}</span>
+                <span class="dial-name">{{ l.name }}</span>
+                <span class="sr-only">{{ l.name }}: {{ l.level }}, {{ l.score }} out of 5</span>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <div class="folder f-high reveal">
+          {% call folder_head('Highlights', 'high-title') %}{% endcall %}
+          <div class="folder-body">
+            <ul class="highs">
+              {% for h in highlights %}
+              <li class="high tone-{{ h.tone }}">
+                <span class="high-figure">{{ h.figure }}</span>
+                <span class="high-ring" aria-hidden="true">
+                  <svg class="ring-svg" viewBox="0 0 64 64"><circle class="ring-track" cx="32" cy="32" r="26"/><circle class="ring-val" cx="32" cy="32" r="26" pathLength="100" style="--dash:{{ (h.ring * 100)|round(1) if h.ring else 100 }}"/></svg>
+                  {% if h.icon %}{{ icon(h.icon) }}{% endif %}
+                </span>
+                <span class="high-title">{{ h.title }}</span>
+                <span class="high-meta">{{ h.meta }}</span>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <div class="folder f-more reveal">
+          {% call folder_head('More about me', 'more-title') %}{% endcall %}
+          <div class="folder-body">
+            <p class="group-label">Off the clock</p>
+            <ul class="chips chips-soft">{% for i in interests %}<li>{{ i }}</li>{% endfor %}</ul>
+            <dl class="details">
+              {% for d in details %}<div><dt>{{ d.label }}</dt><dd>{{ d.value }}</dd></div>{% endfor %}
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="section" aria-labelledby="contact-title">
+        <div class="folder reveal">
+          {% call folder_head('Contact', 'contact-title') %}{% endcall %}
+          <div class="folder-body contact-body">
+            <div class="contact-lead">
+              <p class="contact-big">Have a role, a project or a question?</p>
+              <p class="contact-copy">Send a message here, or reach me directly by email, phone or LinkedIn.</p>
+              <button class="btn btn-ink" type="button" data-open-contact data-ripple>{{ icon('send') }}<span>Write to me</span></button>
+            </div>
+            <ul class="rows">
+              <li class="row">
+                <span class="row-icon">{{ icon('mail') }}</span>
+                <span class="row-text"><span>Email</span><a href="mailto:{{ person.email }}">{{ person.email.split('@')[0] }}<wbr>@{{ person.email.split('@')[1] }}</a></span>
+                <button class="icon-btn" type="button" data-copy="{{ person.email }}" data-copy-label="Email address" aria-label="Copy email address" data-ripple>{{ icon('copy') }}</button>
+              </li>
+              <li class="row">
+                <span class="row-icon">{{ icon('call') }}</span>
+                <span class="row-text"><span>Phone</span><a href="tel:{{ person.phone_tel }}">{{ person.phone_display }}</a></span>
+                <button class="icon-btn" type="button" data-copy="{{ person.phone_display }}" data-copy-label="Phone number" aria-label="Copy phone number" data-ripple>{{ icon('copy') }}</button>
+              </li>
+              <li class="row">
+                <span class="row-icon">{{ icon('linkedin') }}</span>
+                <span class="row-text"><span>LinkedIn</span><a href="{{ person.linkedin }}" target="_blank" rel="noopener">{{ person.linkedin_display }}</a></span>
+                <a class="icon-btn" href="{{ person.linkedin }}" target="_blank" rel="noopener" aria-label="Open LinkedIn profile in a new tab" data-ripple>{{ icon('arrow') }}</a>
+              </li>
+              <li class="row">
+                <span class="row-icon">{{ icon('pin') }}</span>
+                <span class="row-text"><span>Based in</span><strong>{{ person.location }}</strong></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© {{ site.year }} {{ person.name_full }} · {{ person.location }}</p>
+      <a href="/{{ site.pdf }}" download>Download CV (PDF)</a>
+    </footer>
+  </div>
+</div>
+
+<nav class="bottomnav" aria-label="Sections">
+  <a href="#profile" data-tab="profile" aria-current="true"><span class="bn-pill">{{ icon('person') }}</span><span>Profile</span></a>
+  <a href="#journey" data-tab="journey"><span class="bn-pill">{{ icon('route') }}</span><span>Journey</span></a>
+  <a href="#skills" data-tab="skills"><span class="bn-pill">{{ icon('code') }}</span><span>Skills</span></a>
+  <a href="#contact" data-tab="contact"><span class="bn-pill">{{ icon('mail') }}</span><span>Contact</span></a>
+</nav>
+
+<button class="fab" type="button" data-open-contact data-ripple data-fab>{{ icon('edit') }}<span class="fab-label">Write to me</span></button>
+
+<dialog class="sheet" id="dlg-node" aria-labelledby="dlg-node-title">
+  <div class="sheet-inner">
+    <div class="sheet-head">
+      <span class="sheet-icon"><svg class="ic" aria-hidden="true"><use href="#i-work" data-node-icon/></svg></span>
+      <div class="sheet-titles"><h2 id="dlg-node-title" data-node-title></h2><p class="sheet-meta" data-node-meta></p></div>
+      <button class="icon-btn" type="button" data-close aria-label="Close">{{ icon('close') }}</button>
+    </div>
+    <div class="sheet-body" data-node-body></div>
+    <div class="sheet-actions">
+      <button class="btn btn-soft" type="button" data-close data-ripple>Close</button>
+      <button class="btn btn-ink" type="button" data-open-contact data-ripple>{{ icon('send') }}<span>Write to me</span></button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="sheet" id="dlg-contact" aria-labelledby="dlg-contact-title">
+  <div class="sheet-inner">
+    <form class="sheet-form" name="contact" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="company" novalidate data-contact-form>
+      <input type="hidden" name="form-name" value="contact">
+      <input type="hidden" name="subject" value="New message from your CV site">
+      <div class="sheet-head">
+        <span class="sheet-icon">{{ icon('send') }}</span>
+        <div class="sheet-titles"><h2 id="dlg-contact-title">Write to Bumai</h2><p class="sheet-meta">Your message goes straight to my inbox.</p></div>
+        <button class="icon-btn" type="button" data-close aria-label="Close">{{ icon('close') }}</button>
+      </div>
+      <p class="hp" aria-hidden="true"><label>Leave this field empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+      <label class="field"><span class="field-label">Your name</span><input name="name" type="text" required autocomplete="name" placeholder="Ndapewa Shikongo" aria-describedby="err-name" autofocus><span class="field-error" id="err-name" data-error-for="name"></span></label>
+      <label class="field"><span class="field-label">Your email</span><input name="email" type="email" required autocomplete="email" placeholder="name@company.com" aria-describedby="err-email"><span class="field-error" id="err-email" data-error-for="email"></span></label>
+      <label class="field"><span class="field-label">What's it about?</span>
+        <span class="select-wrap"><select name="topic"><option>A job opportunity</option><option>A website or app project</option><option>Something else</option></select>{{ icon('expand', 'select-ic') }}</span>
+      </label>
+      <label class="field"><span class="field-label">Message</span><textarea name="message" rows="4" required placeholder="A few lines about the role or project" aria-describedby="err-message"></textarea><span class="field-error" id="err-message" data-error-for="message"></span></label>
+      <p class="form-error" role="alert" data-form-error hidden></p>
+      <div class="sheet-actions">
+        <button class="btn btn-soft" type="button" data-close data-ripple>Cancel</button>
+        <button class="btn btn-ink" type="submit" data-ripple data-submit>{{ icon('send') }}<span>Send message</span></button>
+      </div>
+    </form>
+    <div class="sheet-done" data-contact-done hidden>
+      <span class="done-ring">{{ icon('check') }}</span>
+      <h2 tabindex="-1" data-done-title>Message sent</h2>
+      <p>Thanks for reaching out. I'll reply to the email address you gave.</p>
+      <button class="btn btn-ink" type="button" data-close data-ripple>Close</button>
+    </div>
+  </div>
+</dialog>
+
+<div class="snackbar" role="status" aria-live="polite" data-snackbar></div>
+
+<script type="application/json" id="journey-data">{{ journey_json|safe }}</script>
+
+{% include 'print.html.j2' %}
+</body>
+</html>
