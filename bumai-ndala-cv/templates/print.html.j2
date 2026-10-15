@@ -1,0 +1,94 @@
+<article class="print-cv" aria-hidden="true">
+  <header class="pcv-head">
+    <div>
+      <h1 class="pcv-name">{{ person.name_full }}</h1>
+      <p class="pcv-role">{{ person.role_line }}</p>
+    </div>
+    <ul class="pcv-contact">
+      <li>{{ person.email }}</li>
+      <li>{{ person.phone_display }}</li>
+      <li>{{ person.linkedin_display }}</li>
+      <li>{{ person.location }}</li>
+    </ul>
+  </header>
+
+  <div class="pcv-cols">
+    <div class="pcv-main">
+      <section>
+        <h2>Profile</h2>
+        <p>{{ person.summary }}</p>
+      </section>
+
+      <section>
+        <h2>Experience</h2>
+        {% for e in experience %}
+        <div class="pcv-item">
+          <div class="pcv-item-head">
+            <h3>{{ e.title }}</h3>
+            <span class="pcv-when">{{ e.period }}</span>
+          </div>
+          <p class="pcv-org">{% if e.product %}{{ e.product }} · {% endif %}{{ e.org }} · {{ e.location }}</p>
+          {% if e.about %}<p class="pcv-about">{{ e.about }}</p>{% endif %}
+          <ul>{% for p in e.points %}<li>{{ p }}</li>{% endfor %}</ul>
+        </div>
+        {% endfor %}
+      </section>
+
+      <section>
+        <h2>Education</h2>
+        {% for e in education %}
+        <div class="pcv-item">
+          <div class="pcv-item-head">
+            <h3>{{ e.title }}</h3>
+            <span class="pcv-when">{{ e.period }}</span>
+          </div>
+          <p class="pcv-org">{{ e.org }} · {{ e.location }}</p>
+          <ul>{% for p in e.points %}<li>{{ p }}</li>{% endfor %}</ul>
+        </div>
+        {% endfor %}
+      </section>
+
+      <section>
+        <h2>Interests</h2>
+        <p>{{ interests|join(' · ') }}</p>
+      </section>
+    </div>
+
+    <aside class="pcv-side">
+      <section>
+        <h2>Skills</h2>
+        <h4>Code</h4>
+        <p>{% for k in skills.code %}{{ k.label }}{% if not loop.last %} · {% endif %}{% endfor %}</p>
+        {% for g in skills.groups %}
+        <h4>{{ g.label }}</h4>
+        <p>{{ g['items']|join(' · ') }}</p>
+        {% endfor %}
+      </section>
+
+      <section>
+        <h2>Languages</h2>
+        <ul class="pcv-langs">
+          {% for l in languages %}
+          <li><span>{{ l.name }}</span><span class="pcv-dots" aria-label="{{ l.score }} of 5">{% for i in range(5) %}<i{% if i < l.score %} class="on"{% endif %}></i>{% endfor %}</span><em>{{ l.level }}</em></li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section>
+        <h2>Highlights</h2>
+        <ul class="pcv-highs">
+          <li><b>90%</b> in English First Language, 2022</li>
+          <li><b>Top 3</b> in French as a foreign language, 2019–2022</li>
+          <li><b>Leadership role</b> in a database programming application development project, 2023</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Details</h2>
+        <dl class="pcv-details">
+          {% for d in details %}<dt>{{ d.label }}</dt><dd>{{ d.value }}</dd>{% endfor %}
+        </dl>
+      </section>
+
+    </aside>
+  </div>
+</article>

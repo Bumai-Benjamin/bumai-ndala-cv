@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/assets/css/site.css?v={{ v.css }}">
+<style>
+  html,body{width:1200px;height:630px;overflow:hidden}
+  .og{position:relative;width:1200px;height:630px;padding:58px 64px;display:grid;grid-template-columns:1fr 330px;gap:20px}
+  .og .folder{height:100%}
+  .og .folder-body{height:calc(100% - 61px);padding:40px 44px;display:flex;flex-direction:column;justify-content:center}
+  .og .name{font-size:86px;margin:0 0 22px}
+  .og .role-line{font-size:24px;max-width:24ch}
+  .og .facts{margin-top:28px}
+  .og .badge-rig{position:absolute;top:-30px;right:92px;width:260px}
+  .og .swing{animation:none!important;transform:rotate(-2deg)}
+</style>
+</head>
+<body>
+<div class="backdrop" aria-hidden="true"></div>
+{% include 'icons.svg.j2' %}
+<div class="og">
+  <div class="folder">
+    <div class="folder-head"><p class="folder-tab"><span class="status"><span class="led"></span>Currently employed</span></p><div class="folder-bay"></div></div>
+    <div class="folder-body">
+      <h1 class="name"><span class="name-first">{{ person.first }}</span> <span class="name-last">{{ person.last }}</span></h1>
+      <p class="role-line">{{ person.role }} <span class="soft">for</span> {{ person.product }} <span class="soft">at</span> {{ person.employer }}</p>
+      <ul class="facts"><li><svg class="ic"><use href="#i-pin"/></svg><span>{{ person.location }}</span></li><li><svg class="ic"><use href="#i-school"/></svg><span>BSc Computer Science · NUST</span></li></ul>
+    </div>
+  </div>
+  <div></div>
+  <div class="badge-rig">
+    <div class="swing">
+      <svg class="lanyard" viewBox="0 0 240 230" preserveAspectRatio="xMidYMax meet">
+        <defs>
+          <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F7E7B4"/><stop offset=".55" stop-color="#C9A24E"/><stop offset="1" stop-color="#7A5814"/></linearGradient>
+          <path id="strapL" d="M58 -10 L113 196"/><path id="strapR" d="M182 -10 L127 196"/>
+        </defs>
+        <path d="M58 -10 L113 196" stroke-width="27" class="strap-edge"/><path d="M182 -10 L127 196" stroke-width="27" class="strap-edge"/>
+        <path d="M58 -10 L113 196" stroke-width="23" class="strap-face"/><path d="M182 -10 L127 196" stroke-width="23" class="strap-face"/>
+        <text class="strap-print" dominant-baseline="central"><textPath href="#strapL" startOffset="6">CALLAFIX • CALLAFIX • CALLAFIX •</textPath></text>
+        <text class="strap-print" dominant-baseline="central"><textPath href="#strapR" startOffset="6">CALLAFIX • CALLAFIX • CALLAFIX •</textPath></text>
+        <rect x="102" y="186" width="36" height="20" rx="6" fill="url(#brass)" stroke="rgba(60,40,0,.45)"/>
+        <circle cx="120" cy="214" r="9.5" fill="none" stroke="url(#brass)" stroke-width="4.6"/>
+      </svg>
+      <div class="badge">
+        <div class="badge-slot-hole"></div>
+        <div class="badge-band"><b>CALLAFIX</b><small>{{ person.employer }}</small></div>
+        <div class="badge-photo"><span>{{ person.initials }}</span></div>
+        <div class="badge-who"><strong>{{ person.name_short }}</strong><span>{{ person.role }}</span></div>
+        <svg class="badge-code" viewBox="0 0 160 30" preserveAspectRatio="none">{% for r in barcode %}<rect x="{{ r[0] }}" y="0" width="{{ r[1] }}" height="30"/>{% endfor %}</svg>
+        <div class="badge-sheen"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

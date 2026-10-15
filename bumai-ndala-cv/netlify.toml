@@ -1,0 +1,4 @@
+# The site is prebuilt into site/, so Netlify only needs to publish that folder.
+[build]
+  publish = "site"
+  command = ""
